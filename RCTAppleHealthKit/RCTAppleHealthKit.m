@@ -22,7 +22,6 @@
 #import "RCTAppleHealthKit+Methods_LabTests.h"
 #import "RCTAppleHealthKit+Methods_Hearing.h"
 #import "RCTAppleHealthKit+Methods_Summary.h"
-#import "RCTAppleHealthKit+Methods_ClinicalRecords.h"
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
@@ -597,12 +596,6 @@ RCT_EXPORT_METHOD(getActivitySummary: (NSDictionary *)input callback:(RCTRespons
     [self summary_getActivitySummary:input callback:callback];
 }
 
-RCT_EXPORT_METHOD(getClinicalRecords:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
-{
-    [self _initializeHealthStore];
-    [self clinicalRecords_getClinicalRecords:input callback:callback];
-}
-
 - (HKHealthStore *)_initializeHealthStore {
   if(![self healthStore]) {
     self.healthStore = [[HKHealthStore alloc] init];
@@ -700,9 +693,9 @@ RCT_EXPORT_METHOD(getClinicalRecords:(NSDictionary *)input callback:(RCTResponse
         @"SleepAnalysis",
         @"InsulinDelivery"
     ];
-    
+
     NSArray *templates = @[@"healthKit:%@:new", @"healthKit:%@:failure", @"healthKit:%@:enabled", @"healthKit:%@:sample", @"healthKit:%@:setup:success", @"healthKit:%@:setup:failure"];
-    
+
     NSMutableArray *supportedEvents = [[NSMutableArray alloc] init];
 
     for(NSString * type in types) {
@@ -728,7 +721,7 @@ RCT_EXPORT_METHOD(getClinicalRecords:(NSDictionary *)input callback:(RCTResponse
 
 - (void)getAuthorizationStatus:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
 {
-  
+
     [self _initializeHealthStore];
     if ([HKHealthStore isHealthDataAvailable]) {
 
@@ -801,22 +794,7 @@ RCT_EXPORT_METHOD(getClinicalRecords:(NSDictionary *)input callback:(RCTResponse
         for(NSString * type in fitnessObservers) {
             [self fitness_registerObserver:type bridge:bridge hasListeners:hasListeners];
         }
-        
-        NSArray *clinicalObservers = @[
-            @"AllergyRecord",
-            @"ConditionRecord",
-            @"CoverageRecord",
-            @"ImmunizationRecord",
-            @"LabResultRecord",
-            @"MedicationRecord",
-            @"ProcedureRecord",
-            @"VitalSignRecord"
-        ];
-        
-        for(NSString * type in clinicalObservers) {
-            [self clinical_registerObserver:type bridge:bridge hasListeners:hasListeners];
-        }
-        
+
         [self results_registerObservers:bridge hasListeners:hasListeners];
 
         NSLog(@"[HealthKit] Background observers added to the app");

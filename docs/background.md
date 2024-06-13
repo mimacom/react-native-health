@@ -31,7 +31,6 @@ step in the README, you can skip this one.
 To setup that in your project, in XCode open your `ios/AppDelegate.m` file and add the
 following statements:
 
-
 ```objective-c
 #import "AppDelegate.h"
 
@@ -90,21 +89,21 @@ up observers for workouts, the events would have the following names:
 ### Example
 
 ```typescript
-import React, { useEffect } from 'react';
-import { NativeEventEmitter, NativeModules } from 'react-native';
+import React, { useEffect } from 'react'
+import { NativeEventEmitter, NativeModules } from 'react-native'
 
 useEffect(() => {
-    new NativeEventEmitter(NativeModules.AppleHealthKit).addListener(
-      'healthKit:HeartRate:new',
-      async () => {
-        console.log('--> observer triggered');
-      },
-    );
-  });
+  new NativeEventEmitter(NativeModules.AppleHealthKit).addListener(
+    'healthKit:HeartRate:new',
+    async () => {
+      console.log('--> observer triggered')
+    },
+  )
+})
 ```
 
 When a new sample appears, in order to get the information you need to call
-the [getSamples](./getSamples.md) or the [getClinicalRecords](./getClinicalRecords.md) method from your callback function.
+the [getSamples](./getSamples.md) method from your callback function.
 
 **Note** - Some HealthKit data types have a minimum update frequency of an
 hour. Even setting up an observer, it might take some moment until your

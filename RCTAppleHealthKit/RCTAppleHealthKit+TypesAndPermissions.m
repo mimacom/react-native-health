@@ -239,29 +239,10 @@
     if ([@"BloodAlcoholContent" isEqualToString: key]) {
         return [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodAlcoholContent];
     }
-    
+
     // Activity Summary
     if ([@"ActivitySummary" isEqualToString:key]){
         return [HKObjectType activitySummaryType];
-    }
-    
-    // Clinical Records
-    if ([@"AllergyRecord" isEqualToString:key]) {
-        return [RCTAppleHealthKit clinicalTypeFromName:@"AllergyRecord"];
-    } else if ([@"ConditionRecord" isEqualToString:key]) {
-        return [RCTAppleHealthKit clinicalTypeFromName:@"ConditionRecord"];
-    } else if ([@"CoverageRecord" isEqualToString:key]) {
-        return [RCTAppleHealthKit clinicalTypeFromName:@"CoverageRecord"];
-    } else if ([@"ImmunizationRecord" isEqualToString:key]) {
-        return [RCTAppleHealthKit clinicalTypeFromName:@"ImmunizationRecord"];
-    } else if ([@"LabResultRecord" isEqualToString:key]) {
-        return [RCTAppleHealthKit clinicalTypeFromName:@"LabResultRecord"];
-    } else if ([@"MedicationRecord" isEqualToString:key]) {
-        return [RCTAppleHealthKit clinicalTypeFromName:@"MedicationRecord"];
-    } else if ([@"ProcedureRecord" isEqualToString:key]) {
-        return [RCTAppleHealthKit clinicalTypeFromName:@"ProcedureRecord"];
-    } else if ([@"VitalSignRecord" isEqualToString:key]) {
-        return [RCTAppleHealthKit clinicalTypeFromName:@"VitalSignRecord"];
     }
 
     return nil;
@@ -435,7 +416,7 @@
     if ([@"Workout" isEqualToString:key]) {
         return [HKObjectType workoutType];
     }
-    
+
     // Workout Route
     if ([@"WorkoutRoute" isEqualToString:key]) {
         if (@available(iOS 11.0, *)) {

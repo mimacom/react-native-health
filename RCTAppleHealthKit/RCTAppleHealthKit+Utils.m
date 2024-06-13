@@ -18,11 +18,11 @@ NSString * const kMetadataKey = @"metadata";
 + (NSArray *)formatWorkoutEvents:(NSArray *)workoutEvents
 {
     NSMutableArray *formattedWorkEvents = [[NSMutableArray alloc] init];
-    
+
     for (id workoutEvent in workoutEvents) {
         NSNumber *eventType = [workoutEvent valueForKey:@"type"];
         NSString *eventDescription = @"";
-        
+
         switch([eventType intValue]) {
             case (int)HKWorkoutEventTypePause:
                 eventDescription = @"pause";
@@ -50,8 +50,8 @@ NSString * const kMetadataKey = @"metadata";
             default:
                 eventDescription = @"";
         }
-        
-        
+
+
         NSObject *formattedEvent = @{
             @"eventTypeInt":eventType,
             @"eventType": eventDescription,
@@ -60,7 +60,7 @@ NSString * const kMetadataKey = @"metadata";
         };
         [formattedWorkEvents addObject: formattedEvent];
     }
-    
+
     return formattedWorkEvents;
 }
 
@@ -90,7 +90,7 @@ NSString * const kMetadataKey = @"metadata";
     } @catch (NSException *exception) {
         NSLog(@"RNHealth: An error occured while trying parse ISO8601 string from date");
         return nil;
-    }   
+    }
 }
 
 
@@ -227,34 +227,6 @@ NSString * const kMetadataKey = @"metadata";
     }
 
     return [HKObjectType workoutType];
-}
-
-+ (HKSampleType *)clinicalTypeFromName:(NSString *)type {
-    if (@available(iOS 12.0, *)) {
-        if ([type isEqual:@"AllergyRecord"]){
-            return [HKObjectType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord];
-        } else if ([type isEqual:@"ConditionRecord"]){
-            return [HKObjectType clinicalTypeForIdentifier:HKClinicalTypeIdentifierConditionRecord];
-        } else if ([type isEqual:@"ImmunizationRecord"]){
-            return [HKObjectType clinicalTypeForIdentifier:HKClinicalTypeIdentifierImmunizationRecord];
-        } else if ([type isEqual:@"LabResultRecord"]){
-            return [HKObjectType clinicalTypeForIdentifier:HKClinicalTypeIdentifierLabResultRecord];
-        } else if ([type isEqual:@"MedicationRecord"]){
-            return [HKObjectType clinicalTypeForIdentifier:HKClinicalTypeIdentifierMedicationRecord];
-        } else if ([type isEqual:@"ProcedureRecord"]){
-            return [HKObjectType clinicalTypeForIdentifier:HKClinicalTypeIdentifierProcedureRecord];
-        } else if ([type isEqual:@"VitalSignRecord"]) {
-            return [HKObjectType clinicalTypeForIdentifier:HKClinicalTypeIdentifierVitalSignRecord];
-        }
-    }
-    
-    if (@available(iOS 14.0, *)) {
-         if ([type isEqual:@"CoverageRecord"]){
-             return [HKObjectType clinicalTypeForIdentifier:HKClinicalTypeIdentifierCoverageRecord];
-         }
-    }
-    
-    return nil;
 }
 
 + (HKQueryAnchor *)hkAnchorFromOptions:(NSDictionary *)options {

@@ -435,11 +435,6 @@ declare module 'react-native-health' {
       callback: (err: string, results: HealthValue[]) => void,
     ): void
 
-    getClinicalRecords(
-      options: HealthClinicalRecordOptions,
-      callback: (err: string, results: Array<HealthClinicalRecord>) => void,
-    ): void
-
     setObserver(options: HealthObserverOptions): void
 
     getActivitySummary(
@@ -605,32 +600,6 @@ declare module 'react-native-health' {
     appleExerciseTimeGoal: number
     appleStandHours: number
     appleStandHoursGoal: number
-  }
-
-  export interface HealthClinicalRecordOptions {
-    startDate: string
-    endDate?: string
-    limit?: number
-    ascending?: boolean
-    type: ClinicalRecordType
-  }
-
-  export enum ClinicalRecordType {
-    AllergyRecord = 'AllergyRecord',
-    ConditionRecord = 'ConditionRecord',
-    CoverageRecord = 'CoverageRecord',
-    ImmunizationRecord = 'ImmunizationRecord',
-    LabResultRecord = 'LabResultRecord',
-    MedicationRecord = 'MedicationRecord',
-    ProcedureRecord = 'ProcedureRecord',
-    VitalSignRecord = 'VitalSignRecord',
-  }
-
-  export interface HealthClinicalRecord extends BaseValue {
-    sourceName: string
-    sourceId: string
-    displayName: string
-    fhirData: any
   }
 
   /* Health Constants */

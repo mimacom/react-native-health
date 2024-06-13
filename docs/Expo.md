@@ -26,8 +26,6 @@ The plugin provides props for extra customization. Every time you change the pro
 
 - `healthSharePermission` (_string_): Sets the iOS `NSHealthShareUsageDescription` permission message to the `Info.plist`. Defaults to `Allow $(PRODUCT_NAME) to check health info`.
 - `healthUpdatePermission` (_string_): Sets the iOS `NSHealthUpdateUsageDescription` permission message to the `Info.plist`. Defaults to `Allow $(PRODUCT_NAME) to update health info`.
-- `isClinicalDataEnabled` (_boolean_): Adds `health-records` to the `com.apple.developer.healthkit.access` entitlement in the iOS project. Defaults to false.
-- `healthClinicalDescription` (_string_): Sets the iOS `NSHealthClinicalHealthRecordsShareUsageDescription` permission message to the `Info.plist`. Defaults to `Allow $(PRODUCT_NAME) to check health info`.
 
 `app.config.js`
 
@@ -38,10 +36,8 @@ The plugin provides props for extra customization. Every time you change the pro
       [
         "react-native-health",
         {
-          "isClinicalDataEnabled": true,
           "healthSharePermission": "Custom health share permission",
-          "healthUpdatePermission": "Custom health update permission",
-          "healthClinicalDescription": "Custom health share permission for clinical data"
+          "healthUpdatePermission": "Custom health update permission"
         }
       ]
     ]

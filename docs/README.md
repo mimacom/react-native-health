@@ -51,10 +51,6 @@
 - [getBloodType](getBloodType.md)
 - [getDateOfBirth](getDateOfBirth.md)
 
-#### Clinical Records Methods
-
-- [getClinicalRecords](docs/getClinicalRecords.md)
-
 ### Dietary Methods
 
 - [saveFood](saveFood.md)

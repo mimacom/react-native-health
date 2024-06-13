@@ -2,11 +2,10 @@ const { withEntitlementsPlist, withInfoPlist } = require('@expo/config-plugins')
 
 const HEALTH_SHARE = 'Allow $(PRODUCT_NAME) to check health info'
 const HEALTH_UPDATE = 'Allow $(PRODUCT_NAME) to update health info'
-const HEALTH_CLINIC_SHARE = 'Allow $(PRODUCT_NAME) to check health clinical info'
 
 const withHealthKit = (
   config,
-  { healthSharePermission, healthUpdatePermission, isClinicalDataEnabled, healthClinicalDescription } = {},
+  { healthSharePermission, healthUpdatePermission } = {},
 ) => {
   // Add permissions
   config = withInfoPlist(config, (config) => {
@@ -18,12 +17,6 @@ const withHealthKit = (
       healthUpdatePermission ||
       config.modResults.NSHealthUpdateUsageDescription ||
       HEALTH_UPDATE
-    isClinicalDataEnabled ?
-      config.modResults.NSHealthClinicalHealthRecordsShareUsageDescription =
-        healthClinicalDescription ||
-        config.modResults.NSHealthClinicalHealthRecordsShareUsageDescription ||
-        HEALTH_CLINIC_SHARE :
-      null
 
     return config
   })
@@ -35,17 +28,6 @@ const withHealthKit = (
       !Array.isArray(config.modResults['com.apple.developer.healthkit.access'])
     ) {
       config.modResults['com.apple.developer.healthkit.access'] = []
-    }
-
-    if (isClinicalDataEnabled) {
-      config.modResults['com.apple.developer.healthkit.access'].push(
-        'health-records',
-      )
-
-      // Remove duplicates
-      config.modResults['com.apple.developer.healthkit.access'] = [
-        ...new Set(config.modResults['com.apple.developer.healthkit.access']),
-      ]
     }
 
     return config
